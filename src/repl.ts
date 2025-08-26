@@ -1,5 +1,7 @@
-import { stdin } from "node:process";
 import * as readline from "node:readline";
+import { commandExit } from "./commands/command_exit.js";
+import { commandHelp } from "./commands/command_help.js";
+import { getCommands } from "./registry.js";
 
 export function cleanInput(input: string):string[] {
     const cleanInput = input.trim().toLowerCase().split(/\s+/)
@@ -26,9 +28,25 @@ export function startREPL(): void {
 
    rl.on("line", (line) => {
     const input = cleanInput(line)
-    if(input.length > 0) {
-        console.log(`Your command was: ${input[0]}`)
+    const commands = getCommands();
+    let found = false;
+    for(const key in commands) {
+        if(input[0] === key) {
+            try {
+                commands[key].callback(commands)
+                found = true;
+            } catch(error) {
+                if(error instanceof Error) {
+                    console.log(error)
+                }
+            }
+            break;
+        }
     }
+    if(found === false) {
+        console.log("Unknown command")
+    }
+    
     rl.prompt()
    })
 }
