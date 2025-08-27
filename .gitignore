@@ -1,33 +1,25 @@
-# Node modules
+# Node modules & dependencies
 node_modules/
+package-lock.json
 
 # Build output
 dist/
-build/
+*.tsbuildinfo
 
 # Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+repl.log
+*.log
 
-# Environment files (falls du welche nutzt)
-.env
-.env.local
-.env.*.local
-
-# Editor / IDE
-.vscode/
-.idea/
-*.swp
-
-# macOS
+# OS / Editor junk
 .DS_Store
-
-# System
 Thumbs.db
 
-# Optional: lockfiles ignorieren (nur wenn du nicht willst, dass npm/yarn/pnpm lockfiles versioniert werden)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
+# Env / config
+.env
+.nvmrc
+
+# Git
+.git
+
+# Optional: ignore coverage or test artifacts
+coverage/
