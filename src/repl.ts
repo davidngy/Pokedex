@@ -13,13 +13,13 @@ export function cleanInput(input: string):string[] {
         process.stdout.write(`Pokedex > `)
     })
 }*/
-export function startREPL(state: State): void {
+export async function startREPL(state: State): Promise<void> {
    const rl = state.rl;
    const commands = state.commands;
 
    rl.prompt();
 
-   rl.on("line", (line) => {
+   rl.on("line", async (line) => {
     const input = cleanInput(line)
     
     let found = false;
@@ -27,7 +27,7 @@ export function startREPL(state: State): void {
     for(const key in commands) {
         if(input[0] === key) {
             try {
-                commands[key].callback(state)
+                await commands[key].callback(state)
                 found = true;
             } catch(error) {
                 if(error instanceof Error) {
