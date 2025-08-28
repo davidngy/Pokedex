@@ -10,7 +10,6 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
     const catchUser = Math.random() * 300;
     let caught;
     if(exp <= 70) {
-        state.pokedex[pokeInfos.name] = pokeInfos;
         caught = catchUser > exp ? true : false
         if(caught) {
             state.pokedex[pokeInfos.name] = pokeInfos;
@@ -19,7 +18,6 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
             console.log(`${pokeInfos.name} escaped!`)
         }
     } else if(exp <= 120) {
-        state.pokedex[pokeInfos.name] = pokeInfos;
         caught = catchUser > exp ? true : false
         if(caught) {
             state.pokedex[pokeInfos.name] = pokeInfos;
@@ -28,7 +26,6 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
             console.log(`${pokeInfos.name} escaped!`)
         }
     } else if(exp <= 200) {
-        state.pokedex[pokeInfos.name] = pokeInfos;
         caught = catchUser > exp ? true : false
         if(caught) {
             state.pokedex[pokeInfos.name] = pokeInfos;
@@ -37,7 +34,6 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
             console.log(`${pokeInfos.name} escaped!`)
         }
     } else if(exp <= 300) {
-        state.pokedex[pokeInfos.name] = pokeInfos;
         caught = catchUser > exp ? true : false
         if(caught) {
             state.pokedex[pokeInfos.name] = pokeInfos;
@@ -46,7 +42,6 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
             console.log(`${pokeInfos.name} escaped!`)
         }
     } else {
-        state.pokedex[pokeInfos.name] = pokeInfos;
         caught = catchUser > exp ? true : false
         if(caught) {
             state.pokedex[pokeInfos.name] = pokeInfos;
