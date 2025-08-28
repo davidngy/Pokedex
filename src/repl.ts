@@ -27,7 +27,7 @@ export async function startREPL(state: State): Promise<void> {
     for(const key in commands) {
         if(input[0] === key) {
             try {
-                await commands[key].callback(state)
+                await commands[key].callback(state, input[1])
                 found = true;
             } catch(error) {
                 if(error instanceof Error) {

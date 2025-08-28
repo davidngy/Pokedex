@@ -101,3 +101,7 @@ export type Location = {
     }[];
   }[];
 };
+
+export type PokemonLocation = {
+
+}
