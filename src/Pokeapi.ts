@@ -37,6 +37,16 @@ export class PokeAPI {
         this.cache.add(url, location)
         return location
     }
+
+    async fetchPokemon(pokemon: string): Promise<Pokemon> {
+      const url = `${PokeAPI.baseURL}/pokemon/${pokemon}`
+      const response = await fetch(url, {
+        method: "GET"
+      })
+
+      const pokemonName = await response.json()
+      return pokemonName
+    }
 }
 
 export type ShallowLocations = { 
@@ -102,6 +112,13 @@ export type Location = {
   }[];
 };
 
-export type PokemonLocation = {
-
+export type Pokemon = {
+  id: number
+  name: string
+  base_experience: number
+  height: number
+  is_default: boolean
+  order: number
+  weight: number
+  location_area_encounters: string
 }

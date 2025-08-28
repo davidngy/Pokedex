@@ -40,7 +40,7 @@ export class Cache {
             createdAt: Date.now(),
             val: val
         }
-
+        
         this.#cache.set(key, entry);
     }
 
