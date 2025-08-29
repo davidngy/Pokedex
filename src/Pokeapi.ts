@@ -7,6 +7,9 @@ export class PokeAPI {
         this.cache = new Cache(time);
     }
 
+    closeCache() {
+      this.cache.stopReapLoop();
+    }
     async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
         const url = pageURL ?? `${PokeAPI.baseURL}/location-area`;
 
@@ -14,13 +17,22 @@ export class PokeAPI {
         if(cached) {
             return cached;
         }
-        const response = await fetch(url, {
-            method: "GET"
-        })
 
-        const data: ShallowLocations= await response.json()
-        this.cache.add(url, data)
-        return data
+        try {
+          const response = await fetch(url, {
+                method: "GET"
+          })
+          if (!response.ok) {
+            throw new Error(`${response.status} ${response.statusText}`);
+          }
+
+          const data: ShallowLocations= await response.json()
+          this.cache.add(url, data)
+          return data
+        } catch(e) {
+           throw new Error(`Error fetching locations: ${(e as Error).message}`);
+        }
+        
     }
 
     async fetchLocation(locationName: string): Promise<Location> {
@@ -29,23 +41,37 @@ export class PokeAPI {
         if(cached) {
             return cached;
         }
-        const response = await fetch(url , {
-            method: "GET"
-        })
+        try {
+          const response = await fetch(url , {
+              method: "GET"
+          })
 
-        const location: Location = await response.json()
-        this.cache.add(url, location)
-        return location
+          const location: Location = await response.json()
+          this.cache.add(url, location)
+          return location
+        } catch (e) {
+          throw new Error(
+            `Error fetching location '${locationName}': ${(e as Error).message}`,
+          );
+        }
+        
     }
 
     async fetchPokemon(pokemon: string): Promise<Pokemon> {
       const url = `${PokeAPI.baseURL}/pokemon/${pokemon}`
-      const response = await fetch(url, {
-        method: "GET"
-      })
+      try {
+        const response = await fetch(url, {
+          method: "GET"
+        })
 
-      const pokemonName = await response.json()
-      return pokemonName
+        const pokemonName = await response.json()
+        return pokemonName
+      } catch (e) {
+         throw new Error(
+          `Error fetching pokemon '${pokemon}': ${(e as Error).message}`,
+        );
+      }
+      
     }
 }
 

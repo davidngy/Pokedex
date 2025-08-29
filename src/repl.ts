@@ -23,11 +23,11 @@ export async function startREPL(state: State): Promise<void> {
     const input = cleanInput(line)
     
     let found = false;
-
+    const args = input.slice(1)
     for(const key in commands) {
         if(input[0] === key) {
             try {
-                await commands[key].callback(state, input[1])
+                await commands[key].callback(state, ...args)
                 found = true;
             } catch(error) {
                 if(error instanceof Error) {

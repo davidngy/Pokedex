@@ -22,32 +22,32 @@ export function getCommands(): Record<string, CLICommand> {
     },
     map: {
         name: "map",
-        description: "Displays 20 locations and next",
+        description: "Displays 20 locations and next page",
         callback: commandMap
     },
     mapb: {
         name: "mapb",
-        description: "Displays 20 locations and back",
+        description: "Displays 20 locations of previous page",
         callback: commandMapb
     },
     explore: {
-      name: "explore",
+      name: "explore <pokemon_name>",
       description: "Displays Pokemon in given location",
       callback: commandExplore
     },
     catch: {
-      name: "catch",
+      name: "catch <pokemon_name>",
       description: "catching a Pokemon",
       callback: commandCatch
     },
     inspect: {
-      name: "inspect",
+      name: "inspect <pokemon_name>",
       description: "getting infos from pokemon",
       callback: commandInspect
     },
     pokedex: {
       name: "pokedex",
-      description: "listing all caught pokemons",
+      description: "listing all pokemons you've caught",
       callback: commandPokedex
     }
   };

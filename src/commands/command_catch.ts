@@ -2,6 +2,9 @@ import { stat } from "fs";
 import { State } from "src/state";
 
 export async function commandCatch(state: State, ...args: string[]): Promise<void> {
+    if (args.length !== 1) {
+        throw new Error("you must provide a pokemon name");
+    }
     const pokeName = args[0];
     const pokeInfos = await state.pokeapi.fetchPokemon(pokeName)
 
